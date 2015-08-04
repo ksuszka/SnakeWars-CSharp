@@ -37,13 +37,11 @@ namespace SnakeWars.SampleBot
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        public override string ToString() => $"({Width},{Height})";
     }
 
     public struct PointDTO
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public override string ToString() => $"({X},{Y})";
     }
 }
