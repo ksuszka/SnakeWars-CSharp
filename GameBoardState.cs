@@ -13,7 +13,7 @@ namespace SnakeWars.SampleBot
             _gameState = gameState;
         }
 
-        public PointDTO GetSnakeNewHeadPosition(string snakeId, MoveDirection move)
+        public PointDTO GetSnakeNewHeadPosition(string snakeId, Move move)
         {
             var snake = GetSnake(snakeId);
             var newHead = move.GetSnakeNewHead(snake, _gameState.BoardSize);

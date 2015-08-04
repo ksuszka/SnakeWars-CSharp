@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using Newtonsoft.Json;
 using SnakeWars.SampleBot.Properties;
@@ -34,12 +32,19 @@ namespace SnakeWars.SampleBot
                             var mySnakeId = reader.ReadLine();
                             Console.WriteLine("My snake id: {0}", mySnakeId);
 
+                            var snakeEngine = new SnakeEngine(mySnakeId);
+
                             // Loop till key press.
                             while (!Console.KeyAvailable)
                             {
-                                var gameBoardState = new GameBoardState(JsonConvert.DeserializeObject<GameStateDTO>(reader.ReadLine()));
-                                var snakeEngine = new SnakeEngine(mySnakeId, writer);
-                                snakeEngine.NextMove(gameBoardState);
+                                var gameBoardState =
+                                    new GameBoardState(JsonConvert.DeserializeObject<GameStateDTO>(reader.ReadLine()));
+                                var move = snakeEngine.GetNextMove(gameBoardState);
+                                if (move)
+                                {
+                                    Console.WriteLine("Sending command {0}", move.Command);
+                                    writer.WriteLine(move.Command);
+                                }
                             }
                         }
                     }
